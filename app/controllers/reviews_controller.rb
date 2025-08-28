@@ -1,10 +1,37 @@
 class ReviewsController < ApplicationController
+  def index
+    matching_reviews = Review.all
+
+    @list_of_reviews = matching_reviews.order({ :created_at => :desc })
+
+    render({ :template => "review_templates/index" })
+  end
+
   def show
     @card = Flashcard.where("due_date <= ?", Time.now).first
   end
 
   def update
     @card = Flashcard.find(params[:id])
+
+        if reviews.correct_answers <== reviews.incorrect_answers
+      pp #{
+        the_flashcard.word
+        the_flashcard.audio
+        the_flashcard.transliteration
+        the_flashcard.translation
+        the_flashcard.mnemonic
+        the_flashcard.sentence
+        the_flashcard.sentence_translation
+        the_flashcard.part_of_speech
+        }
+    else
+      pp #{
+        the_flashcard.word
+        the_flashcard.audio
+        the_flashcard.transliteration
+        }
+      end
 
     if params[:result] == "correct"
       @card.interval = (@card.interval * 2).round
@@ -14,33 +41,18 @@ class ReviewsController < ApplicationController
       @card.due_date = Time.now + 1.day
     end
 
-    if @card.update_attributes(:interval => @card.interval, :due_date => @card.due_date)
-      redirect_to :back, :notice => "Review recorded!"
+     if the_review.valid?
+      the_review.save
+      redirect_to("/reviews", { :notice => "Review created successfully." })
     else
-      redirect_to :back, :alert => "Something went wrong."
+      redirect_to("/reviews", { :alert => the_review.errors.full_messages.to_sentence })
     end
   end
 end
 
 
 # class ReviewsController < ApplicationController
-#   def index
-#     matching_reviews = Review.all
 
-#     @list_of_reviews = matching_reviews.order({ :created_at => :desc })
-
-#     render({ :template => "review_templates/index" })
-#   end
-
-#   def show
-#     the_id = params.fetch("path_id")
-
-#     matching_reviews = Review.where({ :id => the_id })
-
-#     @the_review = matching_reviews.at(0)
-
-#     render({ :template => "review_templates/show" })
-#   end
 
 #   def create
 #     the_review = Review.new

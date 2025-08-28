@@ -1,27 +1,17 @@
 Rails.application.routes.draw do
   # Routes for the Flashcard resource:
+  get("/", { :controller => "main", :action => "homepage"})
+  get("/about", { :controller => "main", :action => "about"})
 
-  # CREATE
-  post("/insert_flashcard", { :controller => "flashcards", :action => "create" })
 
   # READ
   get("/flashcards", { :controller => "flashcards", :action => "index" })
 
   get("/flashcards/:path_id", { :controller => "flashcards", :action => "show" })
 
-  # UPDATE
-
-  post("/modify_flashcard/:path_id", { :controller => "flashcards", :action => "update" })
-
-  # DELETE
-  get("/delete_flashcard/:path_id", { :controller => "flashcards", :action => "destroy" })
-
   #------------------------------
 
   # Routes for the Review resource:
-
-  # CREATE
-  post("/insert_review", { :controller => "reviews", :action => "create" })
 
   # READ
   get("/reviews", { :controller => "reviews", :action => "index" })
@@ -32,8 +22,6 @@ Rails.application.routes.draw do
 
   post("/modify_review/:path_id", { :controller => "reviews", :action => "update" })
 
-  # DELETE
-  get("/delete_review/:path_id", { :controller => "reviews", :action => "destroy" })
 
   #------------------------------
 
