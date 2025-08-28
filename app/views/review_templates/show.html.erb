@@ -1,0 +1,172 @@
+<h1>
+  Review #<%= @the_review.id %> details
+</h1>
+
+<article>
+  <div>
+    <a href="/reviews">
+      Go back
+    </a>
+  </div>
+
+  <div>
+    <a href="/delete_review/<%= @the_review.id %>">
+      Delete review
+    </a>
+  </div>
+  <dl>
+    <dt>
+      User
+    </dt>
+    <dd>
+      <%= @the_review.user_id %>
+    </dd>
+
+    <dt>
+      Item
+    </dt>
+    <dd>
+      <%= @the_review.item_id %>
+    </dd>
+
+    <dt>
+      Srs stage
+    </dt>
+    <dd>
+      <%= @the_review.srs_stage %>
+    </dd>
+
+    <dt>
+      Due date
+    </dt>
+    <dd>
+      <%= @the_review.due_date %>
+    </dd>
+
+    <dt>
+      Correct answers
+    </dt>
+    <dd>
+      <%= @the_review.correct_answers %>
+    </dd>
+
+    <dt>
+      Incorrect answers
+    </dt>
+    <dd>
+      <%= @the_review.incorrect_answers %>
+    </dd>
+
+    <dt>
+      Interval minutes
+    </dt>
+    <dd>
+      <%= @the_review.interval_minutes %>
+    </dd>
+
+    <dt>
+      Proficiency rate
+    </dt>
+    <dd>
+      <%= @the_review.proficiency_rate %>
+    </dd>
+
+    <dt>
+      Created at
+    </dt>
+    <dd>
+      <%= time_ago_in_words(@the_review.created_at) %> ago
+    </dd>
+
+    <dt>
+      Updated at
+    </dt>
+    <dd>
+      <%= time_ago_in_words(@the_review.updated_at) %> ago
+    </dd>
+  </dl>
+</article>
+
+<hr>
+
+
+<article>
+  <header>
+    <h2>
+      Edit review
+    </h2>
+  </header>
+
+  <form action="/modify_review/<%= @the_review.id %>"  method="post" >
+    <div>
+      <label for="user_id_box">
+        User
+      </label>
+
+      <input type="text" id="user_id_box" name="query_user_id" value="<%= @the_review.user_id %>">
+    </div>
+
+    <div>
+      <label for="item_id_box">
+        Item
+      </label>
+
+      <input type="text" id="item_id_box" name="query_item_id" value="<%= @the_review.item_id %>">
+    </div>
+
+    <div>
+      <label for="srs_stage_box">
+        Srs stage
+      </label>
+
+      <input type="text" id="srs_stage_box" name="query_srs_stage" value="<%= @the_review.srs_stage %>">
+    </div>
+
+    <div>
+      <label for="due_date_box">
+        Due date
+      </label>
+
+      <input type="datetime-local" id="due_date_box" name="query_due_date"
+         value="<%= @the_review.due_date %>">
+    </div>
+
+    <div>
+      <label for="correct_answers_box">
+        Correct answers
+      </label>
+
+      <input type="text" id="correct_answers_box" name="query_correct_answers" value="<%= @the_review.correct_answers %>">
+    </div>
+
+    <div>
+      <label for="incorrect_answers_box">
+        Incorrect answers
+      </label>
+
+      <input type="text" id="incorrect_answers_box" name="query_incorrect_answers" value="<%= @the_review.incorrect_answers %>">
+    </div>
+
+    <div>
+      <label for="interval_minutes_box">
+        Interval minutes
+      </label>
+
+      <input type="text" id="interval_minutes_box" name="query_interval_minutes" value="<%= @the_review.interval_minutes %>">
+    </div>
+
+    <div>
+      <label for="proficiency_rate_box">
+        Proficiency rate
+      </label>
+
+      <input type="text" id="proficiency_rate_box" name="query_proficiency_rate" value="<%= @the_review.proficiency_rate %>">
+    </div>
+
+    <button type="submit">
+      Update review
+    </button>
+  </form>
+</article>
+
+<hr>
