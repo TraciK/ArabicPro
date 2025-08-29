@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
+  devise_for :users
   # Routes for the Flashcard resource:
-  get("/", { :controller => "main", :action => "homepage" })
+  # get("/", { :controller => "main", :action => "homepage" })
+
+  root to: "boards#index"
   get("/about", { :controller => "main", :action => "about" })
 
 
@@ -22,11 +25,7 @@ Rails.application.routes.draw do
 
   put("/reviews/:path_id", { :controller => "reviews", :action => "update" })
 
-
-
   #------------------------------
 
-  devise_for :users
-  # This is a blank app! Pick your first screen, build out the RCAV, and go from there. E.g.:
-  # get("/your_first_screen", { :controller => "pages", :action => "first" })
+
 end
