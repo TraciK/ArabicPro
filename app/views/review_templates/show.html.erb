@@ -19,16 +19,28 @@
     <% end %>
   </div>
 
-  <!-- Clickable span -->
+  <!-- Clickable span styled as a button -->
   <span
+    id="show-answer-btn"
     onclick="
       document.getElementById('hidden-answer').style.display='block';
       document.getElementById('review-buttons').style.display='block';
+      this.style.display='none';
     "
-    style="cursor: pointer; color: blue; text-decoration: underline;"
+    style="
+      display: inline-block;
+      padding: 8px 16px;
+      background-color: #007bff;
+      color: white;
+      border-radius: 4px;
+      cursor: pointer;
+      text-align: center;
+      margin-top: 8px;
+    "
   >
     Show Answer
   </span>
+
 <% else %>
   <p>No cards due! 🎉</p>
 <% end %>
