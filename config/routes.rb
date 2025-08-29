@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   # Routes for the Flashcard resource:
-  get("/", { :controller => "main", :action => "homepage"})
-  get("/about", { :controller => "main", :action => "about"})
+  get("/", { :controller => "main", :action => "homepage" })
+  get("/about", { :controller => "main", :action => "about" })
 
 
   # READ

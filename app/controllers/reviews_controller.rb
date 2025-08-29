@@ -45,15 +45,15 @@ class ReviewsController < ApplicationController
         @card.mnemonic,
         @card.sentence,
         @card.sentence_translation,
-        @card.part_of_speech,
+        @card.part_of_speech
       ]
-    else
+        else
       puts [
         @card.word,
         @card.audio,
-        @card.transliteration,
+        @card.transliteration
        ]
-      end
+        end
 
     if params[:result] == "correct"
       @review.interval ||= 1       # set to 1 if nil
@@ -67,8 +67,8 @@ class ReviewsController < ApplicationController
      if @review.valid?
       @review.save
       redirect_to("/reviews", { :notice => "Review created successfully." })
-    else
+     else
       redirect_to("/reviews", { :alert => the_review.errors.full_messages.to_sentence })
-    end
+     end
   end
 end
