@@ -1,13 +1,13 @@
 <h1>Flashcard Review</h1>
 
-<% if @card %>
+<% if @card && @review %>
   <div class="flashcard">
     <p><%= @card.word %></p>
   </div>
 
-  <%= button_to "Show Answer", "/reviews/#{@review.id}", method: :get %>
+  <%= button_to "Show Answer", "/reviews/#{@review.id}?reveal=true", method: :get, params: { reveal: true } %>
 
- <% if @card && @review %>
+ <% if params[:reveal] %>
     <div class="answer">
       <p><%= @card.translation %></p>
     </div>
@@ -16,6 +16,7 @@
       <%= hidden_field_tag :id, @card.id %>
       <%= button_tag "Correct", name: "result", value: "correct" %>
       <%= button_tag "Incorrect", name: "result", value: "incorrect" %>
+
     <% end %>
   <% end %>
 <% else %>

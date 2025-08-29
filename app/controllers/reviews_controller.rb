@@ -12,7 +12,9 @@ class ReviewsController < ApplicationController
       .where("reviews.due_date <= ?", Time.now)
       .first
 
-    @card = @review.item if @review
+  @card = @review.item if @review
+
+   @reveal_answer = params[:reveal].present?
 
     render({ :template => "review_templates/show" })
   end
