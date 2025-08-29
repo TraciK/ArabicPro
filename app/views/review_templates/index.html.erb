@@ -1,8 +1,16 @@
-<h1>
-  Reviews
-</h1>
+<nav aria-label="breadcrumb">
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li>Reviews</li>
+  </ul>
+</nav>
 
 <hr>
+
+<article>
+  <header>
+    <h1>Reviews</h1>
+  </header>
 
 <% if @no_reviews_due %>
   <p>No cards due! 🎉</p>
@@ -15,3 +23,4 @@
 <% end %>
 
 <hr>
+</article>

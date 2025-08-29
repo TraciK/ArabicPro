@@ -21,11 +21,26 @@
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.conditional.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.colors.min.css">
+
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
   </head>
 
-  <body>
-    <%= yield %>
+  <body class="pico">
+      <div class="container-two-thirds">
+         <%= yield %>
+      </div>
+
+  <footer>
+    <div class="container-two-thirds">
+      <div class="grid text-center">
+        <div>
+          <a href="/about">About</a>
+        </div>
+      </div>
+    </div>
+  </footer>
   </body>
 </html>
