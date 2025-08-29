@@ -1,19 +1,17 @@
 <h1>
-  List of all reviews
+  Reviews
 </h1>
 
 <hr>
 
-<article>
-  <ul>
-    <% @list_of_reviews.each do |a_review| %>
-      <li>
-        <a href="/reviews/<%= a_review.id %>">
-          Review #<%= a_review.id %>
-        </a>
-      </li>
-    <% end %>
-  </ul>
-</article>
+<% if @no_reviews_due %>
+  <p>No cards due! 🎉</p>
+  <%= link_to "Back to Home", "/" %>
+<% else %>
+  <div class="flashcard">
+    <p>There are <%= @due_reviews.count %> cards ready for review.</p>
+    <%= link_to "Go to Review", "/reviews/#{@review.id}" %>
+  </div>
+<% end %>
 
 <hr>

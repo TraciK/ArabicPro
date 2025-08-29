@@ -4,6 +4,16 @@ class ReviewsController < ApplicationController
 
     @list_of_reviews = matching_reviews.order({ :created_at => :desc })
 
+   @due_reviews = Review.where("due_date <= ?", Time.now)
+
+  # Decide what to display
+  if @due_reviews.empty?
+    @no_reviews_due = true
+  else
+    @review = @due_reviews.first
+    @card = @review.item
+  end
+
     render({ :template => "review_templates/index" })
   end
 
@@ -23,8 +33,8 @@ class ReviewsController < ApplicationController
     @card = Flashcard.find(params[:id])
 
     @review = Review.find(params[:id])
-    @correct_answers = Review.correct_answers
-    @incorrect_answers = Review.incorrect_answers
+    @correct_answers = @review.correct_answers
+    @incorrect_answers = @review.incorrect_answers
 
         if @correct_answers <= @incorrect_answers
       puts [
@@ -46,6 +56,7 @@ class ReviewsController < ApplicationController
       end
 
     if params[:result] == "correct"
+      @review.interval ||= 1       # set to 1 if nil
       @review.interval = (@review.interval * 2).round
       @review.due_date = Time.now + @review.interval.days
     else
@@ -61,57 +72,3 @@ class ReviewsController < ApplicationController
     end
   end
 end
-
-
-# class ReviewsController < ApplicationController
-
-
-#   def create
-#     the_review = Review.new
-#     the_review.user_id = params.fetch("query_user_id")
-#     the_review.item_id = params.fetch("query_item_id")
-#     the_review.srs_stage = params.fetch("query_srs_stage")
-#     the_review.due_date = params.fetch("query_due_date")
-#     the_review.correct_answers = params.fetch("query_correct_answers")
-#     the_review.incorrect_answers = params.fetch("query_incorrect_answers")
-#     the_review.interval_minutes = params.fetch("query_interval_minutes")
-#     the_review.proficiency_rate = params.fetch("query_proficiency_rate")
-
-#     if the_review.valid?
-#       the_review.save
-#       redirect_to("/reviews", { :notice => "Review created successfully." })
-#     else
-#       redirect_to("/reviews", { :alert => the_review.errors.full_messages.to_sentence })
-#     end
-#   end
-
-#   def update
-#     the_id = params.fetch("path_id")
-#     the_review = Review.where({ :id => the_id }).at(0)
-
-#     the_review.user_id = params.fetch("query_user_id")
-#     the_review.item_id = params.fetch("query_item_id")
-#     the_review.srs_stage = params.fetch("query_srs_stage")
-#     the_review.due_date = params.fetch("query_due_date")
-#     the_review.correct_answers = params.fetch("query_correct_answers")
-#     the_review.incorrect_answers = params.fetch("query_incorrect_answers")
-#     the_review.interval_minutes = params.fetch("query_interval_minutes")
-#     the_review.proficiency_rate = params.fetch("query_proficiency_rate")
-
-#     if the_review.valid?
-#       the_review.save
-#       redirect_to("/reviews/#{the_review.id}", { :notice => "Review updated successfully." } )
-#     else
-#       redirect_to("/reviews/#{the_review.id}", { :alert => the_review.errors.full_messages.to_sentence })
-#     end
-#   end
-
-#   def destroy
-#     the_id = params.fetch("path_id")
-#     the_review = Review.where({ :id => the_id }).at(0)
-
-#     the_review.destroy
-
-#     redirect_to("/reviews", { :notice => "Review deleted successfully." } )
-#   end
-# end
