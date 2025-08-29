@@ -5,20 +5,30 @@
     <p><%= @card.word %></p>
   </div>
 
-  <%= button_to "Show Answer", "/reviews/#{@review.id}?reveal=true", method: :get, params: { reveal: true } %>
+  <!-- Hidden answer -->
+  <p id="hidden-answer" style="display: none;">
+    <%= @card.translation %>
+  </p>
 
- <% if params[:reveal] %>
-    <div class="answer">
-      <p><%= @card.translation %></p>
-    </div>
-
+  <!-- Hidden form -->
+  <div id="review-buttons" style="display: none;">
     <%= form_with url: "/reviews/#{@review.id}", method: :put do %>
       <%= hidden_field_tag :id, @card.id %>
       <%= button_tag "Correct", name: "result", value: "correct" %>
       <%= button_tag "Incorrect", name: "result", value: "incorrect" %>
-
     <% end %>
-  <% end %>
+  </div>
+
+  <!-- Clickable span -->
+  <span
+    onclick="
+      document.getElementById('hidden-answer').style.display='block';
+      document.getElementById('review-buttons').style.display='block';
+    "
+    style="cursor: pointer; color: blue; text-decoration: underline;"
+  >
+    Show Answer
+  </span>
 <% else %>
   <p>No cards due! 🎉</p>
 <% end %>
