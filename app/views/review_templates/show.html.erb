@@ -2,17 +2,17 @@
 
 <% if @card %>
   <div class="flashcard">
-    <p><%= @flashcard.word %></p>
+    <p><%= @card.word %></p>
   </div>
 
-  <%= button_to "Show Answer", review_path(reveal: true), method: :get %>
+  <%= button_to "Show Answer", "/reviews/#{@review.id}", method: :get %>
 
-  <% if params[:reveal] %>
+ <% if @card && @review %>
     <div class="answer">
       <p><%= @card.translation %></p>
     </div>
 
-    <%= form_with url: review_path(@card), method: :put do %>
+    <%= form_with url: "/reviews/#{@review.id}", method: :put do %>
       <%= hidden_field_tag :id, @card.id %>
       <%= button_tag "Correct", name: "result", value: "correct" %>
       <%= button_tag "Incorrect", name: "result", value: "incorrect" %>

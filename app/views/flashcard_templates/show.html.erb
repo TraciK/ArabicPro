@@ -9,11 +9,7 @@
     </a>
   </div>
 
-  <div>
-    <a href="/delete_flashcard/<%= @the_flashcard.id %>">
-      Delete flashcard
-    </a>
-  </div>
+  
   <dl>
     <dt>
       Word
@@ -85,87 +81,6 @@
       <%= time_ago_in_words(@the_flashcard.updated_at) %> ago
     </dd>
   </dl>
-</article>
-
-<hr>
-
-
-<article>
-  <header>
-    <h2>
-      Edit flashcard
-    </h2>
-  </header>
-
-  <form action="/modify_flashcard/<%= @the_flashcard.id %>"  method="post" >
-    <div>
-      <label for="word_box">
-        Word
-      </label>
-
-      <input type="text" id="word_box" name="query_word" value="<%= @the_flashcard.word %>">
-    </div>
-
-    <div>
-      <label for="audio_box">
-        Audio
-      </label>
-
-      <input type="text" id="audio_box" name="query_audio" value="<%= @the_flashcard.audio %>">
-    </div>
-
-    <div>
-      <label for="transliteration_box">
-        Transliteration
-      </label>
-
-      <input type="text" id="transliteration_box" name="query_transliteration" value="<%= @the_flashcard.transliteration %>">
-    </div>
-
-    <div>
-      <label for="translation_box">
-        Translation
-      </label>
-
-      <input type="text" id="translation_box" name="query_translation" value="<%= @the_flashcard.translation %>">
-    </div>
-
-    <div>
-      <label for="mnemonic_box">
-        Mnemonic
-      </label>
-
-      <input type="text" id="mnemonic_box" name="query_mnemonic" value="<%= @the_flashcard.mnemonic %>">
-    </div>
-
-    <div>
-      <label for="sentence_box">
-        Sentence
-      </label>
-
-      <input type="text" id="sentence_box" name="query_sentence" value="<%= @the_flashcard.sentence %>">
-    </div>
-
-    <div>
-      <label for="sentence_translation_box">
-        Sentence translation
-      </label>
-
-      <input type="text" id="sentence_translation_box" name="query_sentence_translation" value="<%= @the_flashcard.sentence_translation %>">
-    </div>
-
-    <div>
-      <label for="part_of_speech_box">
-        Part of speech
-      </label>
-
-      <input type="text" id="part_of_speech_box" name="query_part_of_speech" value="<%= @the_flashcard.part_of_speech %>">
-    </div>
-
-    <button type="submit">
-      Update flashcard
-    </button>
-  </form>
 </article>
 
 <hr>

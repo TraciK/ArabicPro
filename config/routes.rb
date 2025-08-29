@@ -20,7 +20,8 @@ Rails.application.routes.draw do
 
   # UPDATE
 
-  post("/modify_review/:path_id", { :controller => "reviews", :action => "update" })
+  put("/reviews/:path_id", { :controller => "reviews", :action => "update" })
+
 
 
   #------------------------------

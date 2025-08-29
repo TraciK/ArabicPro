@@ -8,41 +8,51 @@ class ReviewsController < ApplicationController
   end
 
   def show
-    @card = Flashcard.where("due_date <= ?", Time.now).first
+   @review = Review
+      .where("reviews.due_date <= ?", Time.now)
+      .first
+
+    @card = @review.item if @review
+
+    render({ :template => "review_templates/show" })
   end
 
   def update
     @card = Flashcard.find(params[:id])
 
-        if reviews.correct_answers <== reviews.incorrect_answers
-      pp #{
-        the_flashcard.word
-        the_flashcard.audio
-        the_flashcard.transliteration
-        the_flashcard.translation
-        the_flashcard.mnemonic
-        the_flashcard.sentence
-        the_flashcard.sentence_translation
-        the_flashcard.part_of_speech
-        }
+    @review = Review.find(params[:id])
+    @correct_answers = Review.correct_answers
+    @incorrect_answers = Review.incorrect_answers
+
+        if @correct_answers <= @incorrect_answers
+      puts [
+        @card.word,
+        @card.audio,
+        @card.transliteration,
+        @card.translation,
+        @card.mnemonic,
+        @card.sentence,
+        @card.sentence_translation,
+        @card.part_of_speech,
+      ]
     else
-      pp #{
-        the_flashcard.word
-        the_flashcard.audio
-        the_flashcard.transliteration
-        }
+      puts [
+        @card.word,
+        @card.audio,
+        @card.transliteration,
+       ]
       end
 
     if params[:result] == "correct"
-      @card.interval = (@card.interval * 2).round
-      @card.due_date = Time.now + @card.interval.days
+      @review.interval = (@review.interval * 2).round
+      @review.due_date = Time.now + @review.interval.days
     else
-      @card.interval = 1
-      @card.due_date = Time.now + 1.day
+      @review.interval = 1
+      @review.due_date = Time.now + 1.day
     end
 
-     if the_review.valid?
-      the_review.save
+     if @review.valid?
+      @review.save
       redirect_to("/reviews", { :notice => "Review created successfully." })
     else
       redirect_to("/reviews", { :alert => the_review.errors.full_messages.to_sentence })

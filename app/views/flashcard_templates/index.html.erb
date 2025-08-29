@@ -7,79 +7,9 @@
 <article>
   <header>
     <h2>
-      Add a new flashcard
+      Vocabulary
     </h2>
   </header>
-
-  <form action="/insert_flashcard" method="post">
-    <div>
-      <label for="word_box">
-        Word
-      </label>
-
-      <input type="text" id="word_box" name="query_word">
-    </div>
-
-    <div>
-      <label for="audio_box">
-        Audio
-      </label>
-
-      <input type="text" id="audio_box" name="query_audio">
-    </div>
-
-    <div>
-      <label for="transliteration_box">
-        Transliteration
-      </label>
-
-      <input type="text" id="transliteration_box" name="query_transliteration">
-    </div>
-
-    <div>
-      <label for="translation_box">
-        Translation
-      </label>
-
-      <input type="text" id="translation_box" name="query_translation">
-    </div>
-
-    <div>
-      <label for="mnemonic_box">
-        Mnemonic
-      </label>
-
-      <input type="text" id="mnemonic_box" name="query_mnemonic">
-    </div>
-
-    <div>
-      <label for="sentence_box">
-        Sentence
-      </label>
-
-      <input type="text" id="sentence_box" name="query_sentence">
-    </div>
-
-    <div>
-      <label for="sentence_translation_box">
-        Sentence translation
-      </label>
-
-      <input type="text" id="sentence_translation_box" name="query_sentence_translation">
-    </div>
-
-    <div>
-      <label for="part_of_speech_box">
-        Part of speech
-      </label>
-
-      <input type="text" id="part_of_speech_box" name="query_part_of_speech">
-    </div>
-
-    <button type="submit">
-      Create flashcard
-    </button>
-  </form>
 </article>
 
 <hr>
@@ -89,7 +19,7 @@
     <% @list_of_flashcards.each do |a_flashcard| %>
       <li>
         <a href="/flashcards/<%= a_flashcard.id %>">
-          Flashcard #<%= a_flashcard.id %>
+          #<%= a_flashcard.word %>
         </a>
       </li>
     <% end %>
